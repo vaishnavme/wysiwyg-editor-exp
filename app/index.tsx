@@ -1,4 +1,5 @@
-import { SafeAreaView, Text } from "react-native";
+import { Editor } from "@/components/Editor";
+import { SafeAreaView, Text, View } from "react-native";
 
 const App = () => {
   return (
@@ -12,6 +13,14 @@ const App = () => {
       >
         Editor
       </Text>
+
+      <View
+        style={{
+          padding: 16,
+        }}
+      >
+        <Editor />
+      </View>
     </SafeAreaView>
   );
 };
