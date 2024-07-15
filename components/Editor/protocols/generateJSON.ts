@@ -1,6 +1,6 @@
 import markdownIt from "markdown-it";
 
-const markdown = new markdownIt({ html: false, linkify: true });
+const markdown = new markdownIt({ html: false, linkify: true, breaks: true });
 
 const softbreak = {
   type: "softbreak",
@@ -27,13 +27,23 @@ const generateJSON = (text: string) => {
     const prevToken = parsedTokens[index - 1];
     const currentToken = token;
 
-    if (
-      prevToken &&
-      currentToken &&
-      prevToken.type === "paragraph_close" &&
-      currentToken.type === "paragraph_open"
-    ) {
-      tokens.push(softbreak);
+    if (prevToken && currentToken) {
+      switch (currentToken.type) {
+        case "paragraph_open":
+          if (prevToken.type === "paragraph_close") {
+            tokens.push({ ...softbreak, spacing: "\n\n" });
+          }
+          break;
+
+        case "list_item_open": {
+          if (prevToken.type === "list_item_close") {
+            tokens.push({ ...softbreak, spacing: "\n" });
+          }
+          break;
+        }
+        default:
+          break;
+      }
     }
 
     tokens.push(token);

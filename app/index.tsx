@@ -11,7 +11,7 @@ const App = () => {
           fontWeight: 500,
         }}
       >
-        Editor
+        wysiwyg editor
       </Text>
 
       <View
