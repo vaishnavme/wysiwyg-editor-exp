@@ -1,26 +1,50 @@
+import { Button, Modal } from "react-native";
 import { Editor } from "@/components/Editor";
 import { SafeAreaView, Text, View } from "react-native";
+import { useState } from "react";
+import { ProseEditor } from "@/components/ProseMirrorEditor";
+import ModalHeader from "@/components/UI/ModalHeader";
 
 const App = () => {
+  const [showMarkdown, setShowMarkdown] = useState(false);
+  const [showProseEditor, setShowProseEditor] = useState(false);
+
   return (
     <SafeAreaView>
-      <Text
-        style={{
-          fontSize: 20,
-          textAlign: "center",
-          fontWeight: 500,
-        }}
+      <Button title="Markdown Editor" onPress={() => setShowMarkdown(true)} />
+      <Button title="Prose Editor" onPress={() => setShowProseEditor(true)} />
+      <Modal
+        visible={showMarkdown}
+        animationType="slide"
+        presentationStyle="pageSheet"
+        onRequestClose={() => setShowMarkdown(false)}
       >
-        wysiwyg editor
-      </Text>
+        <ModalHeader title="markdown editor" />
 
-      <View
-        style={{
-          padding: 16,
-        }}
+        <View
+          style={{
+            padding: 16,
+          }}
+        >
+          <Editor />
+        </View>
+      </Modal>
+
+      <Modal
+        visible={showProseEditor}
+        animationType="slide"
+        presentationStyle="pageSheet"
+        onRequestClose={() => setShowProseEditor(false)}
       >
-        <Editor />
-      </View>
+        <ModalHeader title="Prose editor" />
+        <View
+          style={{
+            padding: 16,
+          }}
+        >
+          <ProseEditor />
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 };
