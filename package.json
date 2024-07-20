@@ -1,5 +1,5 @@
 {
-  "name": "wysiwyg-markdown-editor",
+  "name": "wysiwyg-editor-exp",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
