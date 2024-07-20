@@ -23,31 +23,31 @@ const generateJSON = (text: string) => {
 
   const tokens = [];
 
-  parsedTokens.forEach((token, index) => {
-    const prevToken = parsedTokens[index - 1];
-    const currentToken = token;
+  // parsedTokens.forEach((token, index) => {
+  //   const prevToken = parsedTokens[index - 1];
+  //   const currentToken = token;
 
-    if (prevToken && currentToken) {
-      switch (currentToken.type) {
-        case "paragraph_open":
-          if (prevToken.type === "paragraph_close") {
-            tokens.push({ ...softbreak, spacing: "\n\n" });
-          }
-          break;
+  //   if (prevToken && currentToken) {
+  //     switch (currentToken.type) {
+  //       case "paragraph_open":
+  //         if (prevToken.type === "paragraph_close") {
+  //           tokens.push({ ...softbreak, spacing: "\n\n" });
+  //         }
+  //         break;
 
-        case "list_item_open": {
-          if (prevToken.type === "list_item_close") {
-            tokens.push({ ...softbreak, spacing: "\n" });
-          }
-          break;
-        }
-        default:
-          break;
-      }
-    }
+  //       // case "list_item_open": {
+  //       //   if (prevToken.type === "list_item_close") {
+  //       //     tokens.push({ ...softbreak, spacing: "\n" });
+  //       //   }
+  //       //   break;
+  //       // }
+  //       default:
+  //         break;
+  //     }
+  //   }
 
-    tokens.push(token);
-  });
+  //   tokens.push(token);
+  // });
 
   return tokens;
 };
